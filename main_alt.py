@@ -2,18 +2,19 @@ import flask
 import pandas
 
 app_alt = flask.Flask(__name__)
-
+df = pandas.read_csv("C:/Users/asukh/Documents/Weather_API/static"
+                     "/dictionary"
+                     ".csv")
 @app_alt.route("/")
 def home():
     return flask.render_template("home_alt.html")
 
 @app_alt.route("/api/v1/<word>")
 def api(word):
-    pandas.read_csv()
+    definition = df.loc[df["word"]==word]["definition"].squeeze()
+    result = {"word":word,"definition": definition}
 
-    cap_word = word.upper()
-    return {"definition":cap_word,
-            "word":word}
+    return result
 
 
 

@@ -4,9 +4,12 @@ import pandas as pd
 
 app = flask.Flask(__name__)
 
+stations  = pd.read_csv("C:/Users/asukh/Documents/Weather_API/data/stations.txt"
+                     "",skiprows=17)
+stations_filtered = stations[['STAID','STANAME                                 ']]
 @app.route("/")
 def home():
-    return flask.render_template("home.html")
+    return flask.render_template("home.html",data = stations_filtered.to_html())
 
 @app.route("/about")
 def about():

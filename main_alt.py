@@ -1,5 +1,5 @@
 import flask
-
+import pandas
 
 app_alt = flask.Flask(__name__)
 
@@ -9,6 +9,8 @@ def home():
 
 @app_alt.route("/api/v1/<word>")
 def api(word):
+    pandas.read_csv()
+
     cap_word = word.upper()
     return {"definition":cap_word,
             "word":word}

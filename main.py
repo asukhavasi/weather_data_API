@@ -1,6 +1,5 @@
 import flask
-import pandas
-
+import pandas as pd
 
 
 app = flask.Flask(__name__)
@@ -19,11 +18,13 @@ def contact():
 
 @app.route("/api/v1/<station>/<date>")
 def api(station,date):
-    # df=pandas.read_csv()
-    temperature = 23
+    filename = f"data/TG_STAID{str(station).zfill(6)}.txt"
+    df= pd.read_csv(filename,skiprows=20,parse_dates=["    DATE"])
+    temp = df.loc[df['    DATE']==date]['   TG'].squeeze()/10
+    # temperature = 23
     return {"station":station,
             "date":date,
-            "temperature":temperature}
+            "temperature":temp}
 
 if __name__ == "__main__":
     app.run(debug=True)
